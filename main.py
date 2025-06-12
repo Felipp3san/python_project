@@ -17,12 +17,19 @@ def main():
         print("3. Sair")
         op = input("Escolha uma opção: ")
 
-        if op == '1':
-            register_user()
-        elif op == '2':
+        if op == '1': # Registrar
+            username = register_user() 
+            if username:
+                print(f"Utilizador '{username}' registado com sucesso.")
+            else:
+                print("Utilizador já existe. Tente outro.")
+        elif op == '2': # Logar
             user_logged = authenticate()
             if user_logged:
+                print(f"Login efetuado como {username}")
                 user_menu(user_logged)
+            else:
+                print("Utilizador não encontrado. Registe-se primeiro.")
         elif op == '3':
             print("Adeus!")
             break

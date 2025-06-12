@@ -1,24 +1,27 @@
 # users.py
+from data import database
 
-from data import users_data
+def get_users():
+    return database.keys()
+
+def get_user(username):
+    if username in get_users():
+        return database[username]
+    return False
 
 def authenticate():
-    username = input("Username: ")
-
-    if username in users_data.keys():
-        print("Login válido!")
+    username = input("Username: ").strip()
+    if get_user(username):
+        print(f"Login efetuado como {username}")
+        return username 
     else:
-        print("Credenciais inválidas.")
-    print("You have successfully logged in!")
+        print("Utilizador não encontrado. Registe-se primeiro.")
+        return False
 
 def register_user():
-    while (True):
-        new_username = input("To register a user, please enter the username of the new user: ").lower()
-        for user in users_data:
-            print(user)
-            if new_username in user:
-                print("The user is already registered.")
-            else:
-                users_data.append({ new_username: { "tasks": [] } })
-                print("New user successfully registered!")
-            break
+    username = input("Novo utilizador: ").strip()
+    if get_user(username):
+        print("Utilizador já existe. Tente outro.")
+    else:
+        database[username] = { "tasks": [] }
+        print(f"Utilizador '{username}' registado com sucesso.")

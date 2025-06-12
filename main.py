@@ -1,10 +1,18 @@
 import os
 
-from users import *
-from tasks import *
+from users import (register_user, authenticate)
+from tasks import (
+    add_task,
+    edit_task,
+    remove_task,
+    get_tasks,
+    get_tasks_by_user
+)
+
 
 def clear_terminal():
     os.system('cls' if os.name == 'nt' else 'clear')
+
 
 def main():
     user_logged = None
@@ -17,25 +25,26 @@ def main():
         print("3. Sair")
         op = input("Escolha uma opção: ")
 
-        if op == '1': # Registrar
-            username = register_user() 
+        if op == '1':  # Registrar
+            username = register_user()
             if username:
                 print(f"Utilizador '{username}' registado com sucesso.")
             else:
                 print("Utilizador já existe. Tente outro.")
-        elif op == '2': # Logar
+        elif op == '2':  # Logar
             user_logged = authenticate()
             if user_logged:
                 print(f"Login efetuado como {username}")
                 user_menu(user_logged)
             else:
                 print("Utilizador não encontrado. Registe-se primeiro.")
-        elif op == '3':
+        elif op == '3':  # Sair
             print("Adeus!")
             break
-        else:
+        else:  # Invalido
             print("Opção inválida. Tente novamente.")
         input("Pressione ENTER para continuar...")
+
 
 def user_menu(user_logged):
     while True:
@@ -48,30 +57,32 @@ def user_menu(user_logged):
         print("6. Pesquisar tarefas")
         print("7. Ver estatísticas")
         print("8. Logout")
-        opc = input("Escolha uma opção: ")
+        op = input("Escolha uma opção: ")
 
-        if opc == '1':
-            add_new_task(user_logged)
-        elif opc == '2':
+        if op == '1':
+            add_task(user_logged)
+        elif op == '2':
             edit_task()
-        elif opc == '3':
+        elif op == '3':
             remove_task()
-        elif opc == '4':
-            #NAO LISTA AS TASKS PENDENTES DE mOENTO. LISTA TODAS AS TASKS DE UM USER.
-            get_my_tasks()
-        elif opc == '5':
+        elif op == '4':
+            # NAO LISTA AS TASKS PENDENTES DE MOMENTO.
+            # LISTA TODAS AS TASKS DE UM USER.
+            get_tasks()
+        elif op == '5':
             pass
-            #mark_as_complete(user)
-        elif opc == '6':
+            # mark_as_complete(user)
+        elif op == '6':
             get_tasks_by_user(user_logged)
-        elif opc == '7':
+        elif op == '7':
             pass
-            #show_statistics(user)
-        elif opc == '8':
+            # show_statistics(user)
+        elif op == '8':
             print(f"Logout de {user_logged}")
             break
         else:
             print("Opção inválida.")
+
 
 if __name__ == "__main__":
     main()

@@ -1,13 +1,6 @@
 import os
-
-from users import (register_user, authenticate)
-from tasks import (
-    add_task,
-    edit_task,
-    remove_task,
-    get_tasks,
-    get_tasks_by_user
-)
+import users
+import tasks
 
 
 def clear_terminal():
@@ -26,13 +19,13 @@ def main():
         op = input("Escolha uma opção: ")
 
         if op == '1':  # Registrar
-            username = register_user()
+            username = users.register_user()
             if username:
                 print(f"Utilizador '{username}' registado com sucesso.")
             else:
                 print("Utilizador já existe. Tente outro.")
         elif op == '2':  # Logar
-            user_logged = authenticate()
+            user_logged = users.authenticate()
             if user_logged:
                 print(f"Login efetuado como {username}")
                 user_menu(user_logged)
@@ -60,20 +53,20 @@ def user_menu(user_logged):
         op = input("Escolha uma opção: ")
 
         if op == '1':
-            add_task(user_logged)
+            tasks.add_task(user_logged)
         elif op == '2':
-            edit_task()
+            tasks.edit_task()
         elif op == '3':
-            remove_task()
+            tasks.remove_task()
         elif op == '4':
             # NAO LISTA AS TASKS PENDENTES DE MOMENTO.
             # LISTA TODAS AS TASKS DE UM USER.
-            get_tasks()
+            tasks.get_tasks()
         elif op == '5':
             pass
             # mark_as_complete(user)
         elif op == '6':
-            get_tasks_by_user(user_logged)
+            tasks.get_tasks_by_user(user_logged)
         elif op == '7':
             pass
             # show_statistics(user)

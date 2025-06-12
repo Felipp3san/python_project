@@ -1,4 +1,5 @@
 # tasks.py
+
 import users
 from data import database
 from datetime import datetime
@@ -80,7 +81,7 @@ def add_task(username):
 
         try:
             # JA NAO E RECORDO SE OS DICIONARIOS SAO MUTAVEIS OU IMUTAVEIS E SE
-            # ISTO VAI SUBSTITUIR ALGUA TAREFA QUE AQUELE UTILIZADOR JA TENHA
+            # ISTO VAI SUBSTITUIR ALGUMA TAREFA QUE AQUELE UTILIZADOR JA TENHA
             # NA LISTA DE TASKS
 
             new_item = {
